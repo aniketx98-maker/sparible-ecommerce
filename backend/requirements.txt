@@ -1,6 +1,7 @@
 fastapi
 uvicorn
 pymongo
+motor
 python-dotenv
 passlib[bcrypt]
 python-jose
