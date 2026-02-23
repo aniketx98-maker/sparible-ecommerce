@@ -41,8 +41,8 @@ const Header = () => {
   return (
     <>
       {/* Top Bar - Free Delivery Message */}
-      <div className=\"bg-orange-600 text-white text-xs py-2 text-center\">
-        <p className=\"font-medium\">🎉 Free Delivery on Orders Above ₹500 | 100% Genuine Products</p>
+      <div className="bg-orange-600 text-white text-xs py-2 text-center">
+        <p className="font-medium">🎉 Free Delivery on Orders Above ₹500 | 100% Genuine Products</p>
       </div>
 
       {/* Main Header */}
