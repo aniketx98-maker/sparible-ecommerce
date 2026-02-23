@@ -5,5 +5,5 @@ motor
 razorpay
 python-dotenv
 passlib[bcrypt]
-python-jose
+PyJWT
 email-validator
