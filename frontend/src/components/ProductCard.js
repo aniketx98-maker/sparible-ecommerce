@@ -98,7 +98,7 @@ const ProductCard = ({ product }) => {
 
         {/* Rating */}
         <div className="flex items-center gap-1 mb-2">
-          <div className="flex items-center bg-green-700 text-white px-1.5 py-0.5 rounded text-xs font-semibold">
+          <div className="flex items-center bg-gradient-to-r from-amber-400 to-orange-500 text-white px-2 py-1 rounded-lg text-xs font-bold shadow-md">
             {product.rating.toFixed(1)}
             <Star size={10} className="ml-0.5 fill-current" />
           </div>
