@@ -189,14 +189,14 @@ const Header = () => {
         </div>
 
         {/* Category Pills Bar - Horizontally Scrollable */}
-        <div className=\"border-t border-gray-200 bg-white\">
-          <div className=\"container mx-auto px-4\">
-            <div className=\"flex gap-2 overflow-x-auto py-3 scrollbar-hide\">
+        <div className="border-t border-gray-200 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="flex gap-2 overflow-x-auto py-3 scrollbar-hide">
               {categories.map((category) => (
                 <Link
                   key={category.name}
                   to={category.path}
-                  className=\"px-4 py-2 bg-gray-100 hover:bg-orange-100 hover:text-orange-600 rounded-full text-sm font-medium whitespace-nowrap transition\"
+                  className="px-4 py-2 bg-gray-100 hover:bg-orange-100 hover:text-orange-600 rounded-full text-sm font-medium whitespace-nowrap transition"
                   data-testid={`category-pill-${category.name}`}
                 >
                   {category.name}
