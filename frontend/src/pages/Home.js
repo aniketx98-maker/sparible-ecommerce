@@ -88,48 +88,48 @@ const Home = () => {
 
   if (loading) {
     return (
-      <div className=\"flex items-center justify-center min-h-screen\">
-        <div className=\"animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600\"></div>
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
       </div>
     );
   }
 
   return (
-    <div className=\"min-h-screen bg-gray-50 pb-16 md:pb-0\" data-testid=\"home-page\">
+    <div className="min-h-screen bg-gray-50 pb-16 md:pb-0" data-testid="home-page">
       {/* Hero Carousel */}
       <HeroCarousel />
 
       {/* Trust Badges */}
-      <section className=\"bg-white py-6 border-b\">
-        <div className=\"container mx-auto px-4\">
-          <div className=\"grid grid-cols-2 md:grid-cols-4 gap-4\">
-            <div className=\"flex flex-col items-center text-center\">
-              <div className=\"w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-2\">
-                <Shield className=\"text-orange-600\" size={24} />
+      <section className="bg-white py-6 border-b">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-2">
+                <Shield className="text-orange-600" size={24} />
               </div>
-              <h3 className=\"font-semibold text-sm\">100% Secure</h3>
-              <p className=\"text-xs text-gray-500\">Payment</p>
+              <h3 className="font-semibold text-sm">100% Secure</h3>
+              <p className="text-xs text-gray-500">Payment</p>
             </div>
-            <div className=\"flex flex-col items-center text-center\">
-              <div className=\"w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-2\">
-                <Truck className=\"text-orange-600\" size={24} />
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-2">
+                <Truck className="text-orange-600" size={24} />
               </div>
-              <h3 className=\"font-semibold text-sm\">Fast Shipping</h3>
-              <p className=\"text-xs text-gray-500\">3-5 Days</p>
+              <h3 className="font-semibold text-sm">Fast Shipping</h3>
+              <p className="text-xs text-gray-500">3-5 Days</p>
             </div>
-            <div className=\"flex flex-col items-center text-center\">
-              <div className=\"w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-2\">
-                <RotateCcw className=\"text-orange-600\" size={24} />
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-2">
+                <RotateCcw className="text-orange-600" size={24} />
               </div>
-              <h3 className=\"font-semibold text-sm\">Easy Return</h3>
-              <p className=\"text-xs text-gray-500\">7 Days</p>
+              <h3 className="font-semibold text-sm">Easy Return</h3>
+              <p className="text-xs text-gray-500">7 Days</p>
             </div>
-            <div className=\"flex flex-col items-center text-center\">
-              <div className=\"w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-2\">
-                <Award className=\"text-orange-600\" size={24} />
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-2">
+                <Award className="text-orange-600" size={24} />
               </div>
-              <h3 className=\"font-semibold text-sm\">Premium Quality</h3>
-              <p className=\"text-xs text-gray-500\">Tested</p>
+              <h3 className="font-semibold text-sm">Premium Quality</h3>
+              <p className="text-xs text-gray-500">Tested</p>
             </div>
           </div>
         </div>
@@ -137,13 +137,13 @@ const Home = () => {
 
       {/* Deal of the Day */}
       {dealOfDay && (
-        <section className=\"py-8 bg-gradient-to-r from-orange-50 to-orange-100\">
-          <div className=\"container mx-auto px-4\">
-            <div className=\"flex items-center justify-center gap-2 mb-4\">
-              <Clock className=\"text-orange-600\" size={24} />
-              <h2 className=\"text-2xl font-bold\">Deal of the Day</h2>
+        <section className="py-8 bg-gradient-to-r from-orange-50 to-orange-100">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Clock className="text-orange-600" size={24} />
+              <h2 className="text-2xl font-bold">Deal of the Day</h2>
             </div>
-            <div className=\"max-w-xs mx-auto\">
+            <div className="max-w-xs mx-auto">
               <ProductCard product={dealOfDay} />
             </div>
           </div>
@@ -151,24 +151,24 @@ const Home = () => {
       )}
 
       {/* Shop by Category */}
-      <section className=\"py-8 bg-white\">
-        <div className=\"container mx-auto px-4\">
-          <div className=\"flex items-center justify-between mb-4\">
-            <h2 className=\"text-xl md:text-2xl font-bold\">Shop by Category</h2>
-            <Link to=\"/products\" className=\"text-orange-600 hover:text-orange-700 text-sm font-medium\">
+      <section className="py-8 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl md:text-2xl font-bold">Shop by Category</h2>
+            <Link to="/products" className="text-orange-600 hover:text-orange-700 text-sm font-medium">
               View All →
             </Link>
           </div>
-          <div className=\"flex gap-3 overflow-x-auto pb-2 scrollbar-hide\">
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
             {mobileCategories.map((category) => (
               <Link
                 key={category.id}
                 to={`/products?category=${category.name}`}
-                className=\"flex-shrink-0 w-24 bg-gradient-to-br from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-xl p-4 text-center transition-all shadow-md hover:shadow-lg\"
+                className="flex-shrink-0 w-24 bg-gradient-to-br from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-xl p-4 text-center transition-all shadow-md hover:shadow-lg"
                 data-testid={`category-${category.id}`}
               >
-                <div className=\"text-3xl mb-2\">{categoryIcons[category.name] || category.icon}</div>
-                <h3 className=\"font-semibold text-xs leading-tight\">{category.name}</h3>
+                <div className="text-3xl mb-2">{categoryIcons[category.name] || category.icon}</div>
+                <h3 className="font-semibold text-xs leading-tight">{category.name}</h3>
               </Link>
             ))}
           </div>
@@ -176,15 +176,15 @@ const Home = () => {
       </section>
 
       {/* Popular Products */}
-      <section className=\"py-8\">
-        <div className=\"container mx-auto px-4\">
-          <div className=\"flex items-center justify-between mb-4\">
-            <h2 className=\"text-xl md:text-2xl font-bold\">Popular Products</h2>
-            <Link to=\"/products\" className=\"text-orange-600 hover:text-orange-700 text-sm font-medium flex items-center gap-1\">
+      <section className="py-8">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl md:text-2xl font-bold">Popular Products</h2>
+            <Link to="/products" className="text-orange-600 hover:text-orange-700 text-sm font-medium flex items-center gap-1">
               View All <ChevronRight size={16} />
             </Link>
           </div>
-          <div className=\"grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4\">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
             {popularProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -193,19 +193,19 @@ const Home = () => {
       </section>
 
       {/* Mobile Brands */}
-      <section className=\"py-8 bg-white\">
-        <div className=\"container mx-auto px-4\">
-          <h2 className=\"text-xl md:text-2xl font-bold mb-4\">Shop by Brand</h2>
-          <div className=\"flex gap-3 overflow-x-auto pb-2 scrollbar-hide\">
+      <section className="py-8 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-xl md:text-2xl font-bold mb-4">Shop by Brand</h2>
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
             {mobileBrands.map((brand) => (
               <Link
                 key={brand.id}
                 to={`/products?brand=${brand.name}`}
-                className=\"flex-shrink-0 w-28 bg-white border-2 border-gray-200 hover:border-orange-600 rounded-lg p-4 text-center transition-all shadow-sm hover:shadow-md\"
+                className="flex-shrink-0 w-28 bg-white border-2 border-gray-200 hover:border-orange-600 rounded-lg p-4 text-center transition-all shadow-sm hover:shadow-md"
                 data-testid={`brand-${brand.id}`}
               >
-                <div className=\"font-bold text-lg mb-1\">{brand.name}</div>
-                <p className=\"text-xs text-orange-600\">View Parts →</p>
+                <div className="font-bold text-lg mb-1">{brand.name}</div>
+                <p className="text-xs text-orange-600">View Parts →</p>
               </Link>
             ))}
           </div>
@@ -213,10 +213,10 @@ const Home = () => {
       </section>
 
       {/* Featured Products */}
-      <section className=\"py-8\">
-        <div className=\"container mx-auto px-4\">
-          <h2 className=\"text-xl md:text-2xl font-bold mb-4\">Featured Products</h2>
-          <div className=\"grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4\">
+      <section className="py-8">
+        <div className="container mx-auto px-4">
+          <h2 className="text-xl md:text-2xl font-bold mb-4">Featured Products</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -249,4 +249,4 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section>\n\n      {/* FAQs - Accordion */}\n      <section className=\"py-8\">\n        <div className=\"container mx-auto px-4\">\n          <h2 className=\"text-xl md:text-2xl font-bold mb-6 text-center\">Frequently Asked Questions</h2>\n          <div className=\"max-w-3xl mx-auto space-y-3\">\n            {faqs.map((faq, index) => (\n              <div key={index} className=\"bg-white rounded-lg border border-gray-200 overflow-hidden\">\n                <button\n                  onClick={() => setOpenFaq(openFaq === index ? null : index)}\n                  className=\"w-full flex items-center justify-between p-4 text-left font-semibold hover:bg-gray-50 transition\"\n                >\n                  {faq.q}\n                  <ChevronDown\n                    className={`transition-transform ${openFaq === index ? 'rotate-180' : ''}`}\n                    size={20}\n                  />\n                </button>\n                {openFaq === index && (\n                  <div className=\"px-4 pb-4 text-sm text-gray-600\">\n                    {faq.a}\n                  </div>\n                )}\n              </div>\n            ))}\n          </div>\n        </div>\n      </section>\n\n      {/* Newsletter Signup */}\n      <section className=\"py-12 bg-gradient-to-r from-orange-600 to-orange-700 text-white\">\n        <div className=\"container mx-auto px-4 text-center\">\n          <Mail className=\"mx-auto mb-4\" size={40} />\n          <h2 className=\"text-2xl font-bold mb-2\">Subscribe to Our Newsletter</h2>\n          <p className=\"mb-6 opacity-90\">Get updates on new products and exclusive offers!</p>\n          <form onSubmit={handleNewsletterSubmit} className=\"max-w-md mx-auto flex gap-2\">\n            <input\n              type=\"email\"\n              required\n              value={email}\n              onChange={(e) => setEmail(e.target.value)}\n              placeholder=\"Enter your email\"\n              className=\"flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none\"\n            />\n            <button\n              type=\"submit\"\n              className=\"bg-white text-orange-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition\"\n            >\n              Subscribe\n            </button>\n          </form>\n        </div>\n      </section>\n\n      {/* App Download Banner */}\n      <section className=\"py-8 bg-white\">\n        <div className=\"container mx-auto px-4\">\n          <div className=\"bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 text-white text-center\">\n            <h2 className=\"text-2xl font-bold mb-2\">Download Sparible App</h2>\n            <p className=\"mb-6 opacity-90\">Shop on the go with our mobile app</p>\n            <div className=\"flex flex-col sm:flex-row gap-3 justify-center\">\n              <button className=\"bg-black hover:bg-gray-900 px-6 py-3 rounded-lg font-medium transition\">\n                📱 Get it on Google Play\n              </button>\n              <button className=\"bg-black hover:bg-gray-900 px-6 py-3 rounded-lg font-medium transition\">\n                🍎 Download on App Store\n              </button>\n            </div>\n          </div>\n        </div>\n      </section>\n    </div>\n  );\n};\n\nexport default Home;
+      </section>\n\n      {/* FAQs - Accordion */}\n      <section className="py-8">\n        <div className="container mx-auto px-4">\n          <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2>\n          <div className="max-w-3xl mx-auto space-y-3">\n            {faqs.map((faq, index) => (\n              <div key={index} className="bg-white rounded-lg border border-gray-200 overflow-hidden">\n                <button\n                  onClick={() => setOpenFaq(openFaq === index ? null : index)}\n                  className="w-full flex items-center justify-between p-4 text-left font-semibold hover:bg-gray-50 transition"\n                >\n                  {faq.q}\n                  <ChevronDown\n                    className={`transition-transform ${openFaq === index ? 'rotate-180' : ''}`}\n                    size={20}\n                  />\n                </button>\n                {openFaq === index && (\n                  <div className="px-4 pb-4 text-sm text-gray-600">\n                    {faq.a}\n                  </div>\n                )}\n              </div>\n            ))}\n          </div>\n        </div>\n      </section>\n\n      {/* Newsletter Signup */}\n      <section className="py-12 bg-gradient-to-r from-orange-600 to-orange-700 text-white">\n        <div className="container mx-auto px-4 text-center">\n          <Mail className="mx-auto mb-4" size={40} />\n          <h2 className="text-2xl font-bold mb-2">Subscribe to Our Newsletter</h2>\n          <p className="mb-6 opacity-90">Get updates on new products and exclusive offers!</p>\n          <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto flex gap-2">\n            <input\n              type="email"\n              required\n              value={email}\n              onChange={(e) => setEmail(e.target.value)}\n              placeholder="Enter your email"\n              className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none"\n            />\n            <button\n              type="submit"\n              className="bg-white text-orange-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"\n            >\n              Subscribe\n            </button>\n          </form>\n        </div>\n      </section>\n\n      {/* App Download Banner */}\n      <section className="py-8 bg-white">\n        <div className="container mx-auto px-4">\n          <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 text-white text-center">\n            <h2 className="text-2xl font-bold mb-2">Download Sparible App</h2>\n            <p className="mb-6 opacity-90">Shop on the go with our mobile app</p>\n            <div className="flex flex-col sm:flex-row gap-3 justify-center">\n              <button className="bg-black hover:bg-gray-900 px-6 py-3 rounded-lg font-medium transition">\n                📱 Get it on Google Play\n              </button>\n              <button className="bg-black hover:bg-gray-900 px-6 py-3 rounded-lg font-medium transition">\n                🍎 Download on App Store\n              </button>\n            </div>\n          </div>\n        </div>\n      </section>\n    </div>\n  );\n};\n\nexport default Home;
