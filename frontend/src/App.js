@@ -4,6 +4,9 @@ import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import MobileBottomNav from './components/MobileBottomNav';
+import BackToTop from './components/BackToTop';
+import ToastProvider from './components/Toast';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import Login from './pages/Login';
@@ -27,6 +30,9 @@ function App() {
               </Routes>
             </main>
             <Footer />
+            <MobileBottomNav />
+            <BackToTop />
+            <ToastProvider />
           </div>
         </BrowserRouter>
       </CartProvider>
