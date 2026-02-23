@@ -62,7 +62,7 @@ const ProductCard = ({ product }) => {
         
         {/* Discount Badge - Top Left */}
         {discountPercentage > 0 && (
-          <div className="absolute top-2 left-2 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded shadow-md">
+          <div className="absolute top-2 left-2 bg-gradient-to-r from-orange-500 to-pink-500 text-white text-xs font-black px-2.5 py-1 rounded-lg shadow-lg">
             {discountPercentage}% OFF
           </div>
         )}
