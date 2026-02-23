@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, ShoppingCart, Star } from 'lucide-react';
+import { Heart, Star, Plus } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import toast from 'react-hot-toast';
 
 const ProductCard = ({ product }) => {
-  const { addToCart, addToWishlist, wishlist } = useCart();
+  const { addToCart, addToWishlist, removeFromWishlist, wishlist } = useCart();
   const { user } = useAuth();
+  const [imageError, setImageError] = useState(false);
   const isInWishlist = wishlist.items?.includes(product.id);
 
   const handleAddToCart = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     addToCart(product.id);
+    toast.success('Added to cart ✓');
   };
 
   const handleWishlist = (e) => {
     e.preventDefault();
-    addToWishlist(product.id);
+    e.stopPropagation();
+    if (isInWishlist) {
+      removeFromWishlist(product.id);
+      toast.success('Removed from wishlist');
+    } else {
+      addToWishlist(product.id);
+      toast.success('Added to wishlist ✓');
+    }
   };
 
   const discountPercentage = product.discount_price 
@@ -26,83 +37,82 @@ const ProductCard = ({ product }) => {
   return (
     <Link 
       to={`/product/${product.id}`}
-      className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow overflow-hidden group"
+      className="bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-300 overflow-hidden group relative"
       data-testid={`product-card-${product.id}`}
     >
-      {/* Image */}
-      <div className="relative overflow-hidden bg-gray-100">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-        />
+      {/* Image Container */}
+      <div className="relative bg-gray-50 aspect-square overflow-hidden">
+        {imageError ? (
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-50 to-orange-100">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center mx-auto mb-2">
+                <span className="text-white font-bold text-xl">S</span>
+              </div>
+              <p className="text-xs text-gray-500">Sparible</p>
+            </div>
+          </div>
+        ) : (
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            onError={() => setImageError(true)}
+          />
+        )}
         
-        {/* Wishlist Button */}
-        <button
-          onClick={handleWishlist}
-          className={`absolute top-2 right-2 p-2 rounded-full bg-white shadow-md hover:bg-orange-50 transition ${
-            isInWishlist ? 'text-red-500' : 'text-gray-600'
-          }`}
-          data-testid={`wishlist-btn-${product.id}`}
-        >
-          <Heart size={18} fill={isInWishlist ? 'currentColor' : 'none'} />
-        </button>
-
-        {/* Discount Badge */}
+        {/* Discount Badge - Top Left */}
         {discountPercentage > 0 && (
-          <div className="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">
+          <div className="absolute top-2 left-2 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded shadow-md">
             {discountPercentage}% OFF
           </div>
         )}
 
-        {/* Stock Badge */}
+        {/* Wishlist Button - Top Right */}
+        <button
+          onClick={handleWishlist}
+          className={`absolute top-2 right-2 p-1.5 rounded-full shadow-md transition-all ${
+            isInWishlist ? 'bg-red-500 text-white' : 'bg-white text-gray-600 hover:bg-red-50'
+          }`}
+          data-testid={`wishlist-btn-${product.id}`}
+        >
+          <Heart size={16} fill={isInWishlist ? 'currentColor' : 'none'} />
+        </button>
+
+        {/* Out of Stock Overlay */}
         {product.stock === 0 && (
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <span className="bg-red-500 text-white px-4 py-2 rounded-lg font-semibold">Out of Stock</span>
+          <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+            <span className="bg-red-600 text-white px-3 py-1.5 rounded text-xs font-bold">Out of Stock</span>
           </div>
         )}
       </div>
 
       {/* Content */}
-      <div className="p-4">
-        {/* Category & Brand */}
-        <div className="text-xs text-gray-500 mb-1">
-          {product.category} • {product.brand}
-        </div>
+      <div className="p-3">
+        {/* Brand */}
+        <div className="text-xs text-gray-500 mb-1 truncate">{product.brand}</div>
 
         {/* Name */}
-        <h3 className="font-semibold text-sm mb-2 line-clamp-2 h-10" data-testid={`product-name-${product.id}`}>
+        <h3 className="text-sm font-medium line-clamp-2 h-10 mb-2" data-testid={`product-name-${product.id}`}>
           {product.name}
         </h3>
 
         {/* Rating */}
         <div className="flex items-center gap-1 mb-2">
-          <div className="flex items-center">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <Star
-                key={star}
-                size={14}
-                className={star <= Math.round(product.rating) ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}
-              />
-            ))}
+          <div className="flex items-center bg-green-700 text-white px-1.5 py-0.5 rounded text-xs font-semibold">
+            {product.rating.toFixed(1)}
+            <Star size={10} className="ml-0.5 fill-current" />
           </div>
-          <span className="text-xs text-gray-600">({product.reviews_count})</span>
+          <span className="text-xs text-gray-500">({product.reviews_count})</span>
         </div>
 
         {/* Price */}
-        <div className="mb-3">
-          {product.discount_price ? (
-            <div className="flex items-center gap-2">
-              <span className="text-lg font-bold text-orange-500" data-testid={`product-price-${product.id}`}>
-                ₹{product.discount_price.toFixed(2)}
-              </span>
-              <span className="text-sm text-gray-500 line-through">
-                ₹{product.price.toFixed(2)}
-              </span>
-            </div>
-          ) : (
-            <span className="text-lg font-bold text-orange-500" data-testid={`product-price-${product.id}`}>
-              ₹{product.price.toFixed(2)}
+        <div className="flex items-baseline gap-2 mb-2">
+          <span className="text-base font-bold text-gray-900" data-testid={`product-price-${product.id}`}>
+            ₹{product.discount_price ? product.discount_price.toFixed(0) : product.price.toFixed(0)}
+          </span>
+          {product.discount_price && (
+            <span className="text-xs text-gray-500 line-through">
+              ₹{product.price.toFixed(0)}
             </span>
           )}
         </div>
@@ -111,15 +121,21 @@ const ProductCard = ({ product }) => {
         <button
           onClick={handleAddToCart}
           disabled={product.stock === 0}
-          className={`w-full py-2 px-4 rounded-lg font-semibold transition flex items-center justify-center gap-2 ${
+          className={`w-full py-2 rounded-lg font-medium text-sm transition-all flex items-center justify-center gap-1.5 ${
             product.stock === 0
-              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              : 'bg-orange-500 text-white hover:bg-orange-600'
+              ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+              : 'bg-orange-600 text-white hover:bg-orange-700 active:scale-95'
           }`}
           data-testid={`add-to-cart-${product.id}`}
         >
-          <ShoppingCart size={18} />
-          {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+          {product.stock === 0 ? (
+            'Out of Stock'
+          ) : (
+            <>
+              <Plus size={16} />
+              Add
+            </>
+          )}
         </button>
       </div>
     </Link>
