@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, Shield, Truck, RotateCcw, Award, Star, Clock, ChevronDown, Mail } from 'lucide-react';
+import { ChevronRight, Shield, Truck, RotateCcw, Award, Star, Clock, ChevronDown, Mail, Percent, FileText, Zap, RefreshCw } from 'lucide-react';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
-import HeroCarousel from '../components/HeroCarousel';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'https://web-constructor-50.preview.emergentagent.com';
 const API = `${BACKEND_URL}/api`;
@@ -16,9 +15,17 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState('');
   const [openFaq, setOpenFaq] = useState(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % 3);
+    }, 5000);
+    return () => clearInterval(timer);
   }, []);
 
   const fetchData = async () => {
@@ -52,14 +59,41 @@ const Home = () => {
   const featuredProducts = products.slice(1, 5);
   const popularProducts = products.slice(5, 9);
 
-  const categoryIcons = {
-    'Battery': '🔋',
-    'Display & Screens': '📱',
-    'Body & Housings': '📦',
-    'Charging Port': '🔌',
-    'Camera': '📷',
-    'Laptop Screen': '💻',
-  };
+  const categoryData = [
+    { name: 'Best Sellers', icon: '🏆', bg: 'from-yellow-500 to-orange-500', link: '/products' },
+    { name: 'Battery', icon: '🔋', bg: 'from-green-500 to-teal-500', link: '/products?category=Battery' },
+    { name: 'Display & Screens', icon: '📱', bg: 'from-blue-500 to-purple-500', link: '/products?category=Display & Screens' },
+    { name: 'Camera', icon: '📷', bg: 'from-pink-500 to-rose-500', link: '/products?category=Camera' },
+    { name: 'Charging Port', icon: '🔌', bg: 'from-indigo-500 to-blue-500', link: '/products?category=Charging Port' },
+    { name: 'Laptop Parts', icon: '💻', bg: 'from-purple-500 to-pink-500', link: '/products?type=laptop' },
+  ];
+
+  const heroBanners = [
+    {
+      title: 'MEGA SALE',
+      subtitle: 'GET UP TO',
+      discount: '70% OFF',
+      code: 'SPARE20',
+      bg: 'from-red-600 via-orange-600 to-yellow-500',
+      image: 'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=800'
+    },
+    {
+      title: 'PREMIUM PARTS',
+      subtitle: 'FLAT',
+      discount: '50% OFF',
+      code: 'FIRST50',
+      bg: 'from-purple-600 via-pink-600 to-red-500',
+      image: 'https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800'
+    },
+    {
+      title: 'LAPTOP DEALS',
+      subtitle: 'SAVE UP TO',
+      discount: '60% OFF',
+      code: 'LAPTOP60',
+      bg: 'from-blue-600 via-indigo-600 to-purple-600',
+      image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=800'
+    }
+  ];
 
   const reviews = [
     { name: 'Rahul M.', rating: 5, text: 'Excellent quality display! Works perfectly on my Samsung S21. Fast delivery too.', initial: 'R', color: 'bg-blue-500' },
@@ -96,40 +130,149 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-16 md:pb-0" data-testid="home-page">
-      {/* Hero Carousel */}
-      <HeroCarousel />
+      {/* Top Promotional Banner */}
+      <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white py-2 px-4 text-center text-sm font-medium">
+        Get Extra 5% Off On Prepaid Orders | Code: <span className="font-bold">SPARIBLE5</span> | <Link to="/products" className="underline">Shop Now</Link>
+      </div>
 
-      {/* Trust Badges */}
+      {/* Category Icons - Boat Style */}
+      <section className="bg-white py-4 border-b sticky top-0 z-40">
+        <div className="container mx-auto px-4">
+          <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+            {categoryData.map((cat, idx) => (
+              <Link
+                key={idx}
+                to={cat.link}
+                className="flex-shrink-0 text-center"
+              >
+                <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${cat.bg} flex items-center justify-center text-3xl mb-2 shadow-lg hover:scale-110 transition-transform`}>
+                  {cat.icon}
+                </div>
+                <p className="text-xs font-medium text-gray-700 w-20 leading-tight">{cat.name}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Hero Banner - Boat Style Dramatic Design */}
+      <section className="relative h-[400px] md:h-[500px] bg-black overflow-hidden">
+        {heroBanners.map((banner, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-700 ${
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0">
+              <img
+                src={banner.image}
+                alt={banner.title}
+                className="w-full h-full object-cover opacity-30"
+              />
+              <div className={`absolute inset-0 bg-gradient-to-br ${banner.bg} opacity-90`}></div>
+            </div>
+
+            {/* Content */}
+            <div className="relative h-full container mx-auto px-4 flex items-center">
+              <div className="text-white max-w-xl">
+                <div className="mb-4">
+                  <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wider">
+                    {banner.title} - LIVE NOW
+                  </span>
+                </div>
+                <h1 className="text-5xl md:text-7xl font-black mb-4 drop-shadow-2xl">
+                  {banner.subtitle}
+                  <span className="block text-6xl md:text-8xl bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-white">
+                    {banner.discount}
+                  </span>
+                </h1>
+                <p className="text-xl mb-6 font-semibold">
+                  Flat 5% off | Use Code: <span className="bg-white text-orange-600 px-3 py-1 rounded font-bold">{banner.code}</span>
+                </p>
+                <Link
+                  to="/products"
+                  className="inline-block bg-white text-orange-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition shadow-2xl"
+                >
+                  SHOP NOW
+                </Link>
+                <p className="text-xs mt-4 opacity-80">*Only on prepaid orders</p>
+              </div>
+
+              {/* Product Images Showcase */}
+              <div className="hidden lg:flex absolute right-10 bottom-10 gap-4">
+                {products.slice(0, 3).map((product, idx) => (
+                  <img
+                    key={idx}
+                    src={product.image}
+                    alt={product.name}
+                    className="w-32 h-32 object-cover rounded-2xl shadow-2xl border-4 border-white/20"
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Slide Indicators */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+              {heroBanners.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentSlide(idx)}
+                  className={`h-2 rounded-full transition-all ${
+                    idx === currentSlide ? 'bg-white w-8' : 'bg-white/50 w-2'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* USP Features - Boat Style */}
       <section className="bg-white py-6 border-b">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="flex flex-col items-center text-center">
-              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-2">
-                <Shield className="text-orange-600" size={24} />
+            <div className="text-center">
+              <div className="relative inline-block mb-2">
+                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto">
+                  <Shield className="text-orange-600" size={32} />
+                </div>
+                <span className="absolute -top-1 -right-1 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                  12+3
+                </span>
               </div>
-              <h3 className="font-semibold text-sm">100% Secure</h3>
-              <p className="text-xs text-gray-500">Payment</p>
+              <h3 className="font-bold text-sm">Extended Warranty</h3>
+              <p className="text-xs text-gray-600">12+3 Months</p>
             </div>
-            <div className="flex flex-col items-center text-center">
-              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-2">
-                <Truck className="text-orange-600" size={24} />
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <FileText className="text-orange-600" size={32} />
               </div>
-              <h3 className="font-semibold text-sm">Fast Shipping</h3>
-              <p className="text-xs text-gray-500">3-5 Days</p>
+              <h3 className="font-bold text-sm">GST Billing</h3>
+              <p className="text-xs text-gray-600">On All Orders</p>
             </div>
-            <div className="flex flex-col items-center text-center">
-              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-2">
-                <RotateCcw className="text-orange-600" size={24} />
+
+            <div className="text-center">
+              <div className="relative inline-block mb-2">
+                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto">
+                  <Truck className="text-orange-600" size={32} />
+                </div>
+                <span className="absolute -top-1 -right-1 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded">
+                  FREE
+                </span>
               </div>
-              <h3 className="font-semibold text-sm">Easy Return</h3>
-              <p className="text-xs text-gray-500">7 Days</p>
+              <h3 className="font-bold text-sm">Express Delivery</h3>
+              <p className="text-xs text-gray-600">On Orders ₹500+</p>
             </div>
-            <div className="flex flex-col items-center text-center">
-              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-2">
-                <Award className="text-orange-600" size={24} />
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <RefreshCw className="text-orange-600" size={32} />
               </div>
-              <h3 className="font-semibold text-sm">Premium Quality</h3>
-              <p className="text-xs text-gray-500">Tested</p>
+              <h3 className="font-bold text-sm">7-Day Replacement</h3>
+              <p className="text-xs text-gray-600">Easy Returns</p>
             </div>
           </div>
         </div>
@@ -137,11 +280,11 @@ const Home = () => {
 
       {/* Deal of the Day */}
       {dealOfDay && (
-        <section className="py-8 bg-gradient-to-r from-orange-50 to-orange-100">
+        <section className="py-8 bg-gradient-to-r from-orange-50 to-red-50">
           <div className="container mx-auto px-4">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Clock className="text-orange-600" size={24} />
-              <h2 className="text-2xl font-bold">Deal of the Day</h2>
+            <div className="flex items-center justify-center gap-2 mb-6">
+              <Clock className="text-orange-600" size={28} />
+              <h2 className="text-2xl md:text-3xl font-black uppercase">Deal of the Day</h2>
             </div>
             <div className="max-w-xs mx-auto">
               <ProductCard product={dealOfDay} />
@@ -150,38 +293,13 @@ const Home = () => {
         </section>
       )}
 
-      {/* Shop by Category */}
+      {/* Popular Products */}
       <section className="py-8 bg-white">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl md:text-2xl font-bold">Shop by Category</h2>
-            <Link to="/products" className="text-orange-600 hover:text-orange-700 text-sm font-medium">
-              View All →
-            </Link>
-          </div>
-          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-            {mobileCategories.map((category) => (
-              <Link
-                key={category.id}
-                to={`/products?category=${category.name}`}
-                className="flex-shrink-0 w-24 bg-gradient-to-br from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-xl p-4 text-center transition-all shadow-md hover:shadow-lg"
-                data-testid={`category-${category.id}`}
-              >
-                <div className="text-3xl mb-2">{categoryIcons[category.name] || category.icon}</div>
-                <h3 className="font-semibold text-xs leading-tight">{category.name}</h3>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Popular Products */}
-      <section className="py-8">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl md:text-2xl font-bold">Popular Products</h2>
-            <Link to="/products" className="text-orange-600 hover:text-orange-700 text-sm font-medium flex items-center gap-1">
-              View All <ChevronRight size={16} />
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl md:text-3xl font-black">Popular Products</h2>
+            <Link to="/products" className="text-orange-600 hover:text-orange-700 font-bold flex items-center gap-1">
+              View All <ChevronRight size={20} />
             </Link>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
@@ -192,20 +310,19 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Mobile Brands */}
-      <section className="py-8 bg-white">
+      {/* Shop by Brand */}
+      <section className="py-8">
         <div className="container mx-auto px-4">
-          <h2 className="text-xl md:text-2xl font-bold mb-4">Shop by Brand</h2>
+          <h2 className="text-2xl md:text-3xl font-black mb-6">Shop by Brand</h2>
           <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
             {mobileBrands.map((brand) => (
               <Link
                 key={brand.id}
                 to={`/products?brand=${brand.name}`}
-                className="flex-shrink-0 w-28 bg-white border-2 border-gray-200 hover:border-orange-600 rounded-lg p-4 text-center transition-all shadow-sm hover:shadow-md"
-                data-testid={`brand-${brand.id}`}
+                className="flex-shrink-0 w-32 bg-white border-2 border-gray-200 hover:border-orange-600 rounded-xl p-4 text-center transition-all shadow-sm hover:shadow-md"
               >
                 <div className="font-bold text-lg mb-1">{brand.name}</div>
-                <p className="text-xs text-orange-600">View Parts →</p>
+                <p className="text-xs text-orange-600 font-semibold">View Parts →</p>
               </Link>
             ))}
           </div>
@@ -213,9 +330,9 @@ const Home = () => {
       </section>
 
       {/* Featured Products */}
-      <section className="py-8">
+      <section className="py-8 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-xl md:text-2xl font-bold mb-4">Featured Products</h2>
+          <h2 className="text-2xl md:text-3xl font-black mb-6">Featured Products</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
@@ -225,18 +342,18 @@ const Home = () => {
       </section>
 
       {/* Customer Reviews */}
-      <section className="py-8 bg-white">
+      <section className="py-8">
         <div className="container mx-auto px-4">
-          <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">What Our Customers Say</h2>
+          <h2 className="text-2xl md:text-3xl font-black mb-6 text-center">What Our Customers Say</h2>
           <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide md:grid md:grid-cols-3 md:overflow-visible">
             {reviews.map((review, i) => (
-              <div key={i} className="flex-shrink-0 w-80 md:w-auto bg-gray-50 rounded-lg p-5 border border-gray-200">
+              <div key={i} className="flex-shrink-0 w-80 md:w-auto bg-white rounded-xl p-5 border-2 border-gray-200 shadow-sm">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className={`w-10 h-10 ${review.color} rounded-full flex items-center justify-center text-white font-bold`}>
+                  <div className={`w-12 h-12 ${review.color} rounded-full flex items-center justify-center text-white font-bold text-lg`}>
                     {review.initial}
                   </div>
                   <div>
-                    <p className="font-semibold">{review.name}</p>
+                    <p className="font-bold">{review.name}</p>
                     <div className="flex">
                       {[...Array(review.rating)].map((_, i) => (
                         <Star key={i} size={14} className="text-yellow-400 fill-yellow-400" />
@@ -252,19 +369,19 @@ const Home = () => {
       </section>
 
       {/* FAQs - Accordion */}
-      <section className="py-8">
+      <section className="py-8 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
+          <h2 className="text-2xl md:text-3xl font-black mb-6 text-center">Frequently Asked Questions</h2>
           <div className="max-w-3xl mx-auto space-y-3">
             {faqs.map((faq, index) => (
-              <div key={index} className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+              <div key={index} className="bg-gray-50 rounded-xl border-2 border-gray-200 overflow-hidden">
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full flex items-center justify-between p-4 text-left font-semibold hover:bg-gray-50 transition"
+                  className="w-full flex items-center justify-between p-4 text-left font-bold hover:bg-gray-100 transition"
                 >
                   {faq.q}
                   <ChevronDown
-                    className={`transition-transform ${openFaq === index ? 'rotate-180' : ''}`}
+                    className={`transition-transform flex-shrink-0 ml-2 ${openFaq === index ? 'rotate-180' : ''}`}
                     size={20}
                   />
                 </button>
@@ -280,11 +397,11 @@ const Home = () => {
       </section>
 
       {/* Newsletter Signup */}
-      <section className="py-12 bg-gradient-to-r from-orange-600 to-orange-700 text-white">
+      <section className="py-12 bg-gradient-to-r from-orange-600 to-red-600 text-white">
         <div className="container mx-auto px-4 text-center">
-          <Mail className="mx-auto mb-4" size={40} />
-          <h2 className="text-2xl font-bold mb-2">Subscribe to Our Newsletter</h2>
-          <p className="mb-6 opacity-90">Get updates on new products and exclusive offers!</p>
+          <Mail className="mx-auto mb-4" size={48} />
+          <h2 className="text-3xl font-black mb-2">Subscribe to Our Newsletter</h2>
+          <p className="mb-6 text-lg opacity-90">Get updates on new products and exclusive offers!</p>
           <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto flex gap-2">
             <input
               type="email"
@@ -292,33 +409,15 @@ const Home = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none"
+              className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
             />
             <button
               type="submit"
-              className="bg-white text-orange-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+              className="bg-white text-orange-600 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition"
             >
               Subscribe
             </button>
           </form>
-        </div>
-      </section>
-
-      {/* App Download Banner */}
-      <section className="py-8 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 text-white text-center">
-            <h2 className="text-2xl font-bold mb-2">Download Sparible App</h2>
-            <p className="mb-6 opacity-90">Shop on the go with our mobile app</p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <button className="bg-black hover:bg-gray-900 px-6 py-3 rounded-lg font-medium transition">
-                📱 Get it on Google Play
-              </button>
-              <button className="bg-black hover:bg-gray-900 px-6 py-3 rounded-lg font-medium transition">
-                🍎 Download on App Store
-              </button>
-            </div>
-          </div>
         </div>
       </section>
     </div>
