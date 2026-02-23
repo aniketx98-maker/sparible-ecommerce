@@ -249,4 +249,80 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section>\n\n      {/* FAQs - Accordion */}\n      <section className="py-8">\n        <div className="container mx-auto px-4">\n          <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2>\n          <div className="max-w-3xl mx-auto space-y-3">\n            {faqs.map((faq, index) => (\n              <div key={index} className="bg-white rounded-lg border border-gray-200 overflow-hidden">\n                <button\n                  onClick={() => setOpenFaq(openFaq === index ? null : index)}\n                  className="w-full flex items-center justify-between p-4 text-left font-semibold hover:bg-gray-50 transition"\n                >\n                  {faq.q}\n                  <ChevronDown\n                    className={`transition-transform ${openFaq === index ? 'rotate-180' : ''}`}\n                    size={20}\n                  />\n                </button>\n                {openFaq === index && (\n                  <div className="px-4 pb-4 text-sm text-gray-600">\n                    {faq.a}\n                  </div>\n                )}\n              </div>\n            ))}\n          </div>\n        </div>\n      </section>\n\n      {/* Newsletter Signup */}\n      <section className="py-12 bg-gradient-to-r from-orange-600 to-orange-700 text-white">\n        <div className="container mx-auto px-4 text-center">\n          <Mail className="mx-auto mb-4" size={40} />\n          <h2 className="text-2xl font-bold mb-2">Subscribe to Our Newsletter</h2>\n          <p className="mb-6 opacity-90">Get updates on new products and exclusive offers!</p>\n          <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto flex gap-2">\n            <input\n              type="email"\n              required\n              value={email}\n              onChange={(e) => setEmail(e.target.value)}\n              placeholder="Enter your email"\n              className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none"\n            />\n            <button\n              type="submit"\n              className="bg-white text-orange-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"\n            >\n              Subscribe\n            </button>\n          </form>\n        </div>\n      </section>\n\n      {/* App Download Banner */}\n      <section className="py-8 bg-white">\n        <div className="container mx-auto px-4">\n          <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 text-white text-center">\n            <h2 className="text-2xl font-bold mb-2">Download Sparible App</h2>\n            <p className="mb-6 opacity-90">Shop on the go with our mobile app</p>\n            <div className="flex flex-col sm:flex-row gap-3 justify-center">\n              <button className="bg-black hover:bg-gray-900 px-6 py-3 rounded-lg font-medium transition">\n                📱 Get it on Google Play\n              </button>\n              <button className="bg-black hover:bg-gray-900 px-6 py-3 rounded-lg font-medium transition">\n                🍎 Download on App Store\n              </button>\n            </div>\n          </div>\n        </div>\n      </section>\n    </div>\n  );\n};\n\nexport default Home;
+      </section>
+
+      {/* FAQs - Accordion */}
+      <section className="py-8">
+        <div className="container mx-auto px-4">
+          <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
+          <div className="max-w-3xl mx-auto space-y-3">
+            {faqs.map((faq, index) => (
+              <div key={index} className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  className="w-full flex items-center justify-between p-4 text-left font-semibold hover:bg-gray-50 transition"
+                >
+                  {faq.q}
+                  <ChevronDown
+                    className={`transition-transform ${openFaq === index ? 'rotate-180' : ''}`}
+                    size={20}
+                  />
+                </button>
+                {openFaq === index && (
+                  <div className="px-4 pb-4 text-sm text-gray-600">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Signup */}
+      <section className="py-12 bg-gradient-to-r from-orange-600 to-orange-700 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <Mail className="mx-auto mb-4" size={40} />
+          <h2 className="text-2xl font-bold mb-2">Subscribe to Our Newsletter</h2>
+          <p className="mb-6 opacity-90">Get updates on new products and exclusive offers!</p>
+          <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto flex gap-2">
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none"
+            />
+            <button
+              type="submit"
+              className="bg-white text-orange-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </section>
+
+      {/* App Download Banner */}
+      <section className="py-8 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-8 text-white text-center">
+            <h2 className="text-2xl font-bold mb-2">Download Sparible App</h2>
+            <p className="mb-6 opacity-90">Shop on the go with our mobile app</p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <button className="bg-black hover:bg-gray-900 px-6 py-3 rounded-lg font-medium transition">
+                📱 Get it on Google Play
+              </button>
+              <button className="bg-black hover:bg-gray-900 px-6 py-3 rounded-lg font-medium transition">
+                🍎 Download on App Store
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Home;
