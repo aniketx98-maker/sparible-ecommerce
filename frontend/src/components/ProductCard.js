@@ -37,7 +37,7 @@ const ProductCard = ({ product }) => {
   return (
     <Link 
       to={`/product/${product.id}`}
-      className="bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-300 overflow-hidden group relative"
+      className="bg-white/90 backdrop-blur-sm rounded-xl border border-gray-200/50 hover:border-orange-500/50 hover:shadow-2xl transition-all duration-300 overflow-hidden group relative"
       data-testid={`product-card-${product.id}`}
     >
       {/* Image Container */}
