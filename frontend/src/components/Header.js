@@ -51,44 +51,44 @@ const Header = () => {
           scrolled ? 'shadow-md' : 'shadow-sm'
         }`}
       >
-        <div className=\"container mx-auto px-4 py-3\">
-          <div className=\"flex items-center justify-between gap-3\">
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex items-center justify-between gap-3">
             {/* Logo */}
-            <Link to=\"/\" className=\"flex items-center gap-2 flex-shrink-0\">
-              <div className=\"w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center\">
-                <span className=\"text-white font-bold text-xl\">S</span>
+            <Link to="/" className="flex items-center gap-2 flex-shrink-0">
+              <div className="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xl">S</span>
               </div>
-              <span className=\"text-xl font-bold text-gray-800 hidden sm:block\">
+              <span className="text-xl font-bold text-gray-800 hidden sm:block">
                 Sparible
               </span>
             </Link>
 
             {/* Search Bar - Inline */}
-            <form onSubmit={handleSearch} className=\"flex-1 max-w-2xl hidden md:block\">
-              <div className=\"relative\">
+            <form onSubmit={handleSearch} className="flex-1 max-w-2xl hidden md:block">
+              <div className="relative">
                 <input
-                  type=\"text\"
-                  placeholder=\"Search for products...\"
+                  type="text"
+                  placeholder="Search for products..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className=\"w-full px-4 py-2.5 pl-11 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent\"
-                  data-testid=\"search-input\"
+                  className="w-full px-4 py-2.5 pl-11 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  data-testid="search-input"
                 />
-                <Search className=\"absolute left-3 top-3 text-gray-400\" size={20} />
+                <Search className="absolute left-3 top-3 text-gray-400" size={20} />
               </div>
             </form>
 
             {/* Right Icons */}
-            <div className=\"flex items-center gap-3 md:gap-4\">
+            <div className="flex items-center gap-3 md:gap-4">
               {/* Wishlist Icon with Badge */}
               <Link
-                to=\"/wishlist\"
-                className=\"relative p-2 hover:bg-gray-100 rounded-lg transition\"
-                data-testid=\"wishlist-icon\"
+                to="/wishlist"
+                className="relative p-2 hover:bg-gray-100 rounded-lg transition"
+                data-testid="wishlist-icon"
               >
-                <Heart className=\"text-gray-700\" size={24} />
+                <Heart className="text-gray-700" size={24} />
                 {wishlistCount > 0 && (
-                  <span className=\"absolute -top-1 -right-1 bg-orange-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold\">
+                  <span className="absolute -top-1 -right-1 bg-orange-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
                     {wishlistCount}
                   </span>
                 )}
@@ -96,13 +96,13 @@ const Header = () => {
 
               {/* Cart Icon with Badge */}
               <Link
-                to=\"/cart\"
-                className=\"relative p-2 hover:bg-gray-100 rounded-lg transition\"
-                data-testid=\"cart-icon\"
+                to="/cart"
+                className="relative p-2 hover:bg-gray-100 rounded-lg transition"
+                data-testid="cart-icon"
               >
-                <ShoppingCart className=\"text-gray-700\" size={24} />
+                <ShoppingCart className="text-gray-700" size={24} />
                 {cartCount > 0 && (
-                  <span className=\"absolute -top-1 -right-1 bg-orange-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold\">
+                  <span className="absolute -top-1 -right-1 bg-orange-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
                     {cartCount}
                   </span>
                 )}
@@ -110,44 +110,44 @@ const Header = () => {
 
               {/* User Menu */}
               {user ? (
-                <div className=\"relative group hidden md:block\">
+                <div className="relative group hidden md:block">
                   <button
-                    className=\"flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg transition\"
-                    data-testid=\"user-menu\"
+                    className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg transition"
+                    data-testid="user-menu"
                   >
-                    <User className=\"text-gray-700\" size={24} />
-                    <span className=\"text-sm font-medium hidden lg:block\">
+                    <User className="text-gray-700" size={24} />
+                    <span className="text-sm font-medium hidden lg:block">
                       {user.name.split(' ')[0]}
                     </span>
                   </button>
-                  <div className=\"absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg hidden group-hover:block\">
+                  <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg hidden group-hover:block">
                     <Link
-                      to=\"/account\"
-                      className=\"block px-4 py-2.5 hover:bg-gray-100 text-sm\"
-                      data-testid=\"my-account-link\"
+                      to="/account"
+                      className="block px-4 py-2.5 hover:bg-gray-100 text-sm"
+                      data-testid="my-account-link"
                     >
                       My Account
                     </Link>
                     <Link
-                      to=\"/orders\"
-                      className=\"block px-4 py-2.5 hover:bg-gray-100 text-sm\"
-                      data-testid=\"my-orders-link\"
+                      to="/orders"
+                      className="block px-4 py-2.5 hover:bg-gray-100 text-sm"
+                      data-testid="my-orders-link"
                     >
                       My Orders
                     </Link>
                     {user.is_admin && (
                       <Link
-                        to=\"/admin\"
-                        className=\"block px-4 py-2.5 hover:bg-gray-100 text-sm\"
-                        data-testid=\"admin-link\"
+                        to="/admin"
+                        className="block px-4 py-2.5 hover:bg-gray-100 text-sm"
+                        data-testid="admin-link"
                       >
                         Admin Panel
                       </Link>
                     )}
                     <button
                       onClick={logout}
-                      className=\"w-full text-left px-4 py-2.5 hover:bg-gray-100 text-red-600 text-sm\"
-                      data-testid=\"logout-button\"
+                      className="w-full text-left px-4 py-2.5 hover:bg-gray-100 text-red-600 text-sm"
+                      data-testid="logout-button"
                     >
                       Logout
                     </button>
@@ -155,9 +155,9 @@ const Header = () => {
                 </div>
               ) : (
                 <Link
-                  to=\"/login\"
-                  className=\"bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-orange-700 transition hidden md:block\"
-                  data-testid=\"login-button\"
+                  to="/login"
+                  className="bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-orange-700 transition hidden md:block"
+                  data-testid="login-button"
                 >
                   Login
                 </Link>
@@ -165,7 +165,7 @@ const Header = () => {
 
               {/* Mobile Menu Toggle */}
               <button
-                className=\"md:hidden p-2\"
+                className="md:hidden p-2"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
                 {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -174,16 +174,16 @@ const Header = () => {
           </div>
 
           {/* Mobile Search */}
-          <form onSubmit={handleSearch} className=\"mt-3 md:hidden\">
-            <div className=\"relative\">
+          <form onSubmit={handleSearch} className="mt-3 md:hidden">
+            <div className="relative">
               <input
-                type=\"text\"
-                placeholder=\"Search for products...\"
+                type="text"
+                placeholder="Search for products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className=\"w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500\"
+                className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
-              <Search className=\"absolute left-3 top-2.5 text-gray-400\" size={20} />
+              <Search className="absolute left-3 top-2.5 text-gray-400" size={20} />
             </div>
           </form>
         </div>
@@ -208,15 +208,15 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className=\"md:hidden bg-white border-t\">
-            <nav className=\"container mx-auto px-4 py-4\">
-              <ul className=\"space-y-3\">
+          <div className="md:hidden bg-white border-t">
+            <nav className="container mx-auto px-4 py-4">
+              <ul className="space-y-3">
                 {user ? (
                   <>
                     <li>
                       <Link
-                        to=\"/account\"
-                        className=\"block text-gray-700 font-medium\"
+                        to="/account"
+                        className="block text-gray-700 font-medium"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         My Account
@@ -224,8 +224,8 @@ const Header = () => {
                     </li>
                     <li>
                       <Link
-                        to=\"/orders\"
-                        className=\"block text-gray-700 font-medium\"
+                        to="/orders"
+                        className="block text-gray-700 font-medium"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         My Orders
@@ -234,8 +234,8 @@ const Header = () => {
                     {user.is_admin && (
                       <li>
                         <Link
-                          to=\"/admin\"
-                          className=\"block text-gray-700 font-medium\"
+                          to="/admin"
+                          className="block text-gray-700 font-medium"
                           onClick={() => setMobileMenuOpen(false)}
                         >
                           Admin Panel
@@ -248,7 +248,7 @@ const Header = () => {
                           logout();
                           setMobileMenuOpen(false);
                         }}
-                        className=\"text-red-600 font-medium\"
+                        className="text-red-600 font-medium"
                       >
                         Logout
                       </button>
@@ -257,8 +257,8 @@ const Header = () => {
                 ) : (
                   <li>
                     <Link
-                      to=\"/login\"
-                      className=\"block bg-orange-600 text-white text-center py-2 rounded-lg font-medium\"
+                      to="/login"
+                      className="block bg-orange-600 text-white text-center py-2 rounded-lg font-medium"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       Login
