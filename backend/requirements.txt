@@ -2,6 +2,7 @@ fastapi
 uvicorn
 pymongo
 motor
+razorpay
 python-dotenv
 passlib[bcrypt]
 python-jose
