@@ -6,7 +6,7 @@ const CartContext = createContext();
 
 export const useCart = () => useContext(CartContext);
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'https://web-constructor-50.preview.emergentagent.com';
 const API = `${BACKEND_URL}/api`;
 
 export const CartProvider = ({ children }) => {
