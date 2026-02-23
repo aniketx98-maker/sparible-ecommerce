@@ -4,7 +4,7 @@ import { Filter, X, SlidersHorizontal, ArrowUpDown } from 'lucide-react';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'https://web-constructor-50.preview.emergentagent.com';
 const API = `${BACKEND_URL}/api`;
 
 const Products = () => {
